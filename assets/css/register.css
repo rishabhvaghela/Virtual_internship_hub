@@ -1,0 +1,160 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* background-color: rgba(0, 0, 0, 0.173); */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      /* justify-content:space-between; */
+      align-items: center;
+      position: relative;
+
+    }
+
+    /* Background Image (Full Cover) */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    .register-card {
+      position: fixed;
+      right: 15%;
+      border-radius: 16px;
+      width: 400px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(8, 8, 8, 0.974);
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .register-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgb(5, 4, 4);
+    }
+
+    h2 {
+      text-align: center;
+      color: #110f0f;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #110f0f;
+
+    }
+
+    .full-name,
+    .email,
+    .pass,
+    .role-fields,
+    .companyFields {
+      margin: 18px 0;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      /* margin-bottom: 18px; */
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: none;
+      box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+      transform: translateY(-2px);
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #0e0e0f;
+      text-decoration: none;
+      margin: 0 6px;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #8000ffdb;
+    }
+
+
+    .back-btn {
+      text-decoration: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgb(220, 7, 7);
+      padding: 10px;
+      transition: 0.4s;
+    }
+
+    .back-btn:hover {
+      background-color: rgb(174, 10, 10);
+      transition: 0.4s;
+    }
+
+    /* ============================
+   Page Transition (Register)
+============================ */
+
+/* Page enter animation */
+
+body.page{
+  animation: pageEnter 0.6s ease forwards;
+}
+
+/* Enter from LEFT (login se aa raha hai) */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+

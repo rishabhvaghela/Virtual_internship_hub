@@ -1,0 +1,168 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(125deg, #1a2a3a, #0f1c2e);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #f0f4f8;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 32px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                  0 0 0 1px rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      font-weight: 700;
+      font-size: 26px;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e0e7ff;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    /* Modern file input */
+    input[type="file"] {
+      padding: 8px;
+      background: transparent;
+      border: none;
+      color: #cbd5e1;
+    }
+
+    input[type="file"]::file-selector-button {
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 8px 14px;
+      margin-right: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background: rgba(74, 222, 128, 0.25);
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #4ade80, #22d3ee);
+      border: none;
+      border-radius: 12px;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(74, 222, 128, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Back Link */
+   .back-btn {
+      text-decoration: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color:rgb(220, 7, 7);
+      padding: 5px 5px 0 5px;
+      transition: 0.4s ;
+    }
+
+    .back-btn:hover{
+      background-color:rgb(174, 10, 10);
+      transition: 0.4s ;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 24px;
+      }
+
+      .form-container h2 {
+        font-size: 22px;
+      }
+
+      input,
+      textarea,
+      .submit-btn {
+        padding: 12px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body {
+        padding: 12px;
+      }
+    }

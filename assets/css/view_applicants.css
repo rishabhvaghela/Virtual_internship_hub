@@ -1,0 +1,185 @@
+        /* Minimal inline styles for layout — matches your design system */
+        body {
+            position: relative;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 0;
+            right: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: red;
+            padding: 5px 5px 0 5px;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .applicants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 78px;
+            margin-top: 20px;
+        }
+
+        .applicant-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .applicant-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        .applicant-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .applicant-role {
+            color: #5f59c9;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .applicant-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 6px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.reviewed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status.selected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view {
+            background: #5f59c9;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: white;
+            color: black;
+            border: 3px solid #5f59c9;
+        }
+
+        .btn-reject {
+            background: #e63946;
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: white;
+            color: black;
+            border: 3px solid #e63946;
+        }
+
+        .btn-shortlist{
+            background-color: #2be42bbe;
+            color: #484a49;
+        }
+        .btn-shortlist:hover{
+            background-color: white;
+            color: black;
+            border: 3px solid #2be42bbe;
+        }
+        .btn-interview{
+            background-color: #d2e317;
+            color: #484a49;
+        }
+        .btn-interview:hover{
+            background-color: white;
+            color: black;
+            border: 3px solid #d2e317;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            main {
+                padding: 1.2rem;
+            }
+
+            .applicants-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }

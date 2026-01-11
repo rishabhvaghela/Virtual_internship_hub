@@ -1,0 +1,164 @@
+    /* Global */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+}
+
+    /* Background Image (Full Cover) */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    /* Card */
+    .login-card {
+      position: fixed;
+      left: 15%;
+      border-radius: 16px;
+      width: 380px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(8, 8, 8, 0.974);
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .login-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgb(5, 4, 4);
+    }
+
+    h2 {
+      text-align: center;
+      color: #cdc5c5;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #cdc5c5;
+    }
+    
+    .email {
+      margin: 20px 0;
+    }
+
+    .password {
+      margin-bottom: 30px;
+    }
+
+    input,
+    select {
+      background-color:transparent;
+      width: 100%;
+      padding: 12px;
+      color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    select>option{
+      background-color: #000000c6;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: none;
+      box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
+      outline: none;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+      transform: translateY(-2px);
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #0e0e0f;
+      text-decoration: none;
+      margin: 0 6px;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #faf8fcc5;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgb(220, 7, 7);
+      padding: 10px;
+      transition: 0.4s;
+    }
+
+    .back-btn:hover {
+      background-color: rgb(174, 10, 10);
+      transition: 0.4s;
+    }
+
+    /* ============================
+   Page Transition Animations
+============================ */
+
+/* Page enter */
+
+body.page{
+  animation: pageEnter 0.6s ease forwards;
+}
+
+/* Enter from right */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
