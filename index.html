@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virutual Internship Hub </title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
+<base href="/virtual_internship_hub/">
+</head>
+
+<body>
+
+
+
+  <header>
+    <!-- Nav Section -->
+    <nav>
+      <div class="logo">
+        <img src="assets/images/logo/Virtual Internship Hub.jpeg" alt=""> Virtual Internship Hub
+      </div>
+      <div class="menu" id="menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="internship.html?from=home">Internships</a></li>
+          <li><a href="about.html?from=home">About</a></li>
+          <li><a href="contact.html?from=home">Contact</a></li>
+          <form class="search-form">
+            <input type="text" placeholder="Search internships..." />
+            <button type="submit"><img src="assets/svg/search.svg" alt=""></button>
+          </form>
+
+        </ul>
+        <div>
+          <a href="login.html"><button type="button" class="btn btn1">Login</button></a>
+         <a href="register.html"> <button type="button" class="btn btn2">Register</button></a>
+        </div>
+      </div>
+
+      <div class="toggle" id="toggle">⋮</div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Kickstart Your Career with the Right Internship</h1>
+        <p>Virtual Internship Hub makes it simple for students to learn, grow, and start their career journey.</p>
+        <button onclick="window.location.href='internship.html?from=home'" class="primary-btn">Find Internships</button>
+      </div>
+      <img src="assets/images/Hero section.jpg" alt="Internship Illustration" loading="eager">
+    </section>
+    <!-- Heading -->
+    <section id="student-section">
+      <h2 class="h2">
+        🎓 For Students
+      </h2>
+
+      <!-- Sub-heading -->
+      <h3 class="sb-head">
+        Find the right internship opportunities for your career growth
+      </h3>
+
+
+      <!-- Card -->
+  <div class="card-container">
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="https://img.icons8.com/color/96/student-male.png" alt="Internship">
+      <h3>Web Development Internship</h3>
+      <p>Learn and build real projects using HTML, CSS, and JavaScript.</p>
+      <a href="#" class="apply"><button>Apply Now</button></a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="https://img.icons8.com/color/96/company.png" alt="Internship">
+      <h3>Software Testing Internship</h3>
+      <p>Get hands-on experience in manual and automation testing.</p>
+      <a href="#" class="apply"><button>Apply Now</button></a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="https://img.icons8.com/color/96/business.png" alt="Internship">
+      <h3>Digital Marketing Internship</h3>
+      <p>Work on SEO, social media campaigns, and content strategies.</p>
+      <a href="#" class="apply"><button>Apply Now</button></a>
+    </div>
+  </div>
+
+  
+
+  </main>
+
+  <footer></footer>
+
+<script src="assets/js/toggle.js"></script>
+<script>
+
+const apply = document.querySelectorAll('.apply');
+
+apply.forEach(button => {
+  button.addEventListener("click", () => {
+    const result = confirm("❗Please login first");
+    if (result) {
+      window.location.href = "login.html";
+    }
+    else{
+      alert("stay without login");
+    }
+  });
+});
+</script>
+
+
+</body>
+
+</html>

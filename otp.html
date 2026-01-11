@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Verify OTP – Virtual Internship Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/otp.css">
+  <link rel="shortcut icon" href="assets/images/logo/Web Icon.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <div class="otp-card">
+    <h2>Email Verification</h2>
+    <p>Enter the 6-digit OTP sent to your email</p>
+
+    <form id="otpForm">
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" />
+        <input type="text" maxlength="1" />
+        <input type="text" maxlength="1" />
+        <input type="text" maxlength="1" />
+        <input type="text" maxlength="1" />
+        <input type="text" maxlength="1" />
+      </div>
+
+      <div class="error-text" id="errorText"></div>
+
+      <button type="submit">Verify OTP</button>
+    </form>
+
+    <div class="resend">
+      Didn’t get OTP?
+      <span id="resendBtn">Resend OTP</span>
+      <p id="resendMsg"></p>
+
+
+    </div>
+  </div>
+  <script src="assets/js/otp.js"></script>
+</body>
+
+</html>

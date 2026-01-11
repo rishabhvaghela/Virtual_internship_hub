@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Virtual Internship Hub</title>
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
+  <link rel="stylesheet" href="assets/css/register.css">
+  <link rel="stylesheet" href="assets/css/validation.css">
+  <link rel="stylesheet" href="assets/css/loading.css">
+
+
+</head>
+
+<body class="page">
+
+   <img src="assets/images/register-back.jpg" alt="" class="background">
+
+  <!-- Dynamic Back Button -->
+  <a id="backLink" class="back-btn" href="index.html">
+    <img src="assets/svg/cancel.svg" alt="">
+  </a>
+
+  <div class="register-card">
+    <p id="otp-error"></p>
+    <h2>Register</h2>
+<form action="/virtual_internship_hub/backend/actions/auth/register.php" method="POST" id="registerForm">
+      <label for="role">Register As</label>
+      <select id="role" name="role" required>
+        <option value="" class="role">Select Role</option>
+        <option value="student">Student</option>
+        <option value="company">Company</option>
+      </select>
+
+      <div class="full-name">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
+        <small id="usererr"></small>
+      </div>
+
+      <div class="email">
+        <label for="email">Email</label>
+        <input type="email" id="email"  name="email" placeholder="Enter your email">
+        <small id="emailerr"></small>
+      </div>
+
+      <div class="pass">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create password">
+        <small id="passerr"></small>
+      </div>
+
+      <!-- Student Fields -->
+      <div id="studentFields" class="role-fields">
+        <label for="resume">Upload Resume (PDF)</label>
+        <input type="file" id="resume" accept=".pdf">
+      </div>
+
+      <!-- Company Fields -->
+      <div id="companyFields" class="role-fields">
+        <label for="website">Website</label>
+        <input type="url" id="website" placeholder="https://yourcompany.com">
+      </div>
+
+
+      <button type="submit">Register</button>
+
+      <div class="links">
+        Already have an account? <a href="login.html" id="loginLink">Login</a>
+      </div>
+    </form>
+  </div>
+
+  
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="success-ring">
+      <svg viewBox="0 0 52 52">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25"/>
+        <path class="checkmark-check" d="M14 27l7 7 17-17"/>
+      </svg>
+    </div>
+
+    <h2>Registration Successful</h2>
+    <p>Your account has been created successfully.<br/>Go to the login page</p>
+
+    <div class="actions">
+      <button class="primary" id="login-btn">Login</button>
+    </div>
+  </div>
+</div>
+
+<div id="loaderOverlay">
+  <div class="loader"></div>
+  <p>Sending OTP...</p>
+</div>
+
+
+  <script src="assets/js/register.js"></script>
+  <script src="assets/js/validation.js"></script>
+
+</body>
+
+</html>

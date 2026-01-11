@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Applicants – Company Dashboard</title>
+    <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
+    <link rel="stylesheet" href="assets/css/view_applicants.css" />
+
+</head>
+
+<body>
+    <!-- Dynamic Back Button -->
+    <a id="backLink" class="back-btn" href="company_dashboard.html">
+        <img src="assets/svg/cancel.svg" alt="">
+    </a>
+    <main>
+        <div class="page-header">
+            <h1>Applicants for Your Internships</h1>
+            <p>Review, shortlist, or reject candidates for your online internships.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <select class="filter-select">
+                <option>All Internships</option>
+                <option>Web Development Intern</option>
+                <option>UI/UX Design Intern</option>
+                <option>Data Analyst Intern</option>
+            </select>
+            <select class="filter-select">
+                <option>All Status</option>
+                <option>Pending</option>
+                <option>Reviewed</option>
+                <option>Selected</option>
+                <option>Rejected</option>
+            </select>
+        </div>
+
+        <!-- Applicants Grid -->
+        <div class="applicants-grid">
+            <!-- Applicant 1 -->
+            <div class="applicant-card">
+                <div class="applicant-name">Rahul Sharma</div>
+                <div class="applicant-role">Applied for: Web Development Intern</div>
+                <div class="applicant-detail">
+                    <span>Email:</span>
+                    <span>rahul@example.com</span>
+                </div>
+                <div class="applicant-detail">
+                    <span>Resume:</span>
+                    <a href="#" style="color: #5f59c9; text-decoration: underline;">View PDF</a>
+                </div>
+                <div class="applicant-detail">
+                    <span>Status:</span>
+                    <span class="status-badge status pending">Pending Review</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn btn-view">View Details</button>
+                    <button class="action-btn btn-shortlist">Shortlist</button>
+                    <button class="action-btn btn-interview">Interview</button>
+                    <button class="action-btn btn-reject">Reject</button>
+                </div>
+
+            </div>
+
+            <!-- Applicant 2 -->
+            <div class="applicant-card">
+                <div class="applicant-name">Priya Mehta</div>
+                <div class="applicant-role">Applied for: UI/UX Design Intern</div>
+                <div class="applicant-detail">
+                    <span>Email:</span>
+                    <span>priya@example.com</span>
+                </div>
+                <div class="applicant-detail">
+                    <span>Portfolio:</span>
+                    <a href="#" style="color: #5f59c9; text-decoration: underline;">Visit Link</a>
+                </div>
+                <div class="applicant-detail">
+                    <span>Status:</span>
+                    <span class="status-badge status reviewed">Reviewed</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn btn-view">View Details</button>
+                    <button class="action-btn btn-shortlist">Shortlist</button>
+                    <button class="action-btn btn-interview">Interview</button>
+                    <button class="action-btn btn-reject">Reject</button>
+                </div>
+            </div>
+
+            <!-- Applicant 3 -->
+            <div class="applicant-card">
+                <div class="applicant-name">Arjun Patel</div>
+                <div class="applicant-role">Applied for: Data Analyst Intern</div>
+                <div class="applicant-detail">
+                    <span>Email:</span>
+                    <span>arjun@example.com</span>
+                </div>
+                <div class="applicant-detail">
+                    <span>Resume:</span>
+                    <a href="#" style="color: #5f59c9; text-decoration: underline;">View PDF</a>
+                </div>
+                <div class="applicant-detail">
+                    <span>Status:</span>
+                    <span class="status-badge status selected">Selected</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn btn-view">View Details</button>
+                </div>
+            </div>
+        </div>
+    </main>
+<script src="assets/js/view-applicants.js"></script>
+</body>
+
+</html>
