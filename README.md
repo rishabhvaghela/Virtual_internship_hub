@@ -1,5 +1,6 @@
 # Virtual_internship_hub
-This the website which is create an bridge between student and company.
+Virtual Internship Hub is a full stack web application that connects students with companies offering internships. 
+It allows students to apply for internships and companies to manage applications through a secure dashboard.
 
 ## Features 
 
