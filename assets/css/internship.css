@@ -467,3 +467,17 @@
          margin-top: 10px;
      }
  }
+
+
+
+ .no-internship {
+  display: none;
+  text-align: center;
+  margin: 4rem 0;
+  color: #718096;
+}
+
+.no-internship h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
