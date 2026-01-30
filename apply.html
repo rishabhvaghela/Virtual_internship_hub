@@ -44,17 +44,23 @@
 
 
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const backLink = document.getElementById("backLink");
-    const params = new URLSearchParams(window.location.search);
-    const from = params.get("from");
+document.addEventListener("DOMContentLoaded", () => {
+  const backLink = document.getElementById("backLink");
 
-    if (from === "student") {
-      backLink.href = "student_dashboard.html";
-    } else if (from === "internship") {
-      backLink.href = "internship.html";
-    } 
+  backLink.addEventListener("click", e => {
+    e.preventDefault();
+
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      const params = new URLSearchParams(window.location.search);
+      const from = params.get("from");
+      window.location.href =
+        from === "student" ? "student_dashboard.html" : "index.html";
+    }
   });
+});
+
 </script>
 
 </body>
