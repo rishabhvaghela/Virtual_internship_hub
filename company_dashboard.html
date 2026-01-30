@@ -84,34 +84,8 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Web Development Intern</td>
-            <td>12</td>
-            <td><span class="status active">Active</span></td>
-            <td>
-              <button class="table-btn edit">Edit</button>
-              <button class="table-btn delete">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>UI/UX Design Intern</td>
-            <td>7</td>
-            <td><span class="status closed">Closed</span></td>
-            <td>
-              <button class="table-btn edit">Edit</button>
-              <button class="table-btn delete">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Data Analyst Intern</td>
-            <td>18</td>
-            <td><span class="status active">Active</span></td>
-            <td>
-              <button class="table-btn edit">Edit</button>
-              <button class="table-btn delete">Delete</button>
-            </td>
-          </tr>
+        <tbody id="myInternshipsBody">
+          <!-- JS will inject rows here -->
         </tbody>
       </table>
     </section>
@@ -119,24 +93,42 @@
 
   </main>
 
+  <!-- EDIT INTERNSHIP MODAL -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+
+    <h3>Edit Internship</h3>
+
+    <form id="updateForm">
+      <input type="hidden" id="internshipId">
+
+      <input type="text" id="title" placeholder="Internship Title" required>
+      <input type="text" id="department" placeholder="Department" required>
+
+      <select id="location">
+        <option value="remote">Remote</option>
+      </select>
+
+      <input type="date" id="startDate" required>
+      <input type="date" id="endDate" required>
+      <input type="text" id="duration" placeholder="Duration" required>
+      <input type="text" id="stipend" placeholder="Stipend">
+
+      <input type="text" id="skills" placeholder="Skills">
+      <textarea id="description" placeholder="Description"></textarea>
+
+     <button type="submit" class="table-btn save">Update</button>
+
+    </form>
+
+  </div>
+</div>
+
+
   <footer></footer>
 
   <script src="assets/js/toggle.js"></script>
-
-  <script>
-  </script>
-  <script>
-    const post = document.getElementById('post-internship');
-    const view = document.getElementById('view-applicants');
-
-    post.addEventListener("click", () => {
-      window.location.href = 'post_internship.html';
-    })
-
-    view.addEventListener("click", () => {
-      window.location.href = 'view_applicants.html';
-    })
-  </script>
+<script src="assets/js/company.js"></script>
 </body>
 
 </html>
