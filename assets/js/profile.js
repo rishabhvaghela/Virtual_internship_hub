@@ -7,11 +7,8 @@ const saveBtn = document.getElementById('saveBtn');
 const successModal = document.getElementById('successModal');
 const closeModal = document.getElementById('closeModal');
 
-// const profileImage = document.getElementById('profileImage');
-// const fileInput = document.getElementById('fileInput');
 const resumeUploadInput = document.getElementById('resumeUpload');
 const resumeFileName = document.getElementById('resumeFileName');
-// const profileOverlay = document.getElementById('profile');
 const uploadBtn = document.getElementById('upload');
 
 /* ===============================
