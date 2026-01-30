@@ -75,3 +75,60 @@
       padding: 10px 0;
       color: #555;
     }
+
+    /* ===============================
+   SUCCESS MODAL
+================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+
+.modal-box {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  animation: scaleIn 0.3s ease;
+}
+
+.modal-box h2 {
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.modal-box p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.modal-box button {
+  padding: 8px 20px;
+  border: none;
+  background: #2e7d32;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-box button:hover {
+  background: #256428;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
