@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post Online Internship</title>
   <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
-<link rel="stylesheet" href="assets/css/post_internship.css">
+  <link rel="stylesheet" href="assets/css/post_internship.css">
 </head>
+
 <body>
 
-        <!-- Dynamic Back Button -->
-    <a id="backLink" class="back-btn" href="company_dashboard.html">
-        <img src="assets/svg/cancel.svg" alt="">
-    </a>
+  <!-- Dynamic Back Button -->
+  <a id="backLink" class="back-btn" href="company_dashboard.html">
+    <img src="assets/svg/cancel.svg" alt="">
+  </a>
 
   <div class="container">
     <header>
@@ -20,7 +22,7 @@
     </header>
 
     <div class="form-container">
-      <form id="postInternshipForm" >
+      <form id="postInternshipForm">
         <!-- Hidden field to enforce remote -->
         <input type="hidden" name="type" value="Remote" />
 
@@ -56,6 +58,12 @@
         </div>
 
         <div class="form-group">
+          <label>End Date *</label>
+          <input type="date" name="endDate" required>
+        </div>
+
+
+        <div class="form-group">
           <label for="stipend">Stipend (per month)</label>
           <input type="text" id="stipend" name="stipend" placeholder="e.g., ₹10,000 or 'Unpaid'" />
         </div>
@@ -67,7 +75,8 @@
 
         <div class="form-group">
           <label for="description">Description *</label>
-          <textarea id="description" name="description" required placeholder="Describe the role, responsibilities, and what the intern will learn..."></textarea>
+          <textarea id="description" name="description" required
+            placeholder="Describe the role, responsibilities, and what the intern will learn..."></textarea>
         </div>
 
         <div class="form-group">
@@ -80,13 +89,32 @@
     </div>
   </div>
 
+
   <script>
-    document.getElementById('postInternshipForm').addEventListener('submit', function(e) {
-      // Optional: Replace alert with real API call later
+    /* ===============================
+       SUBMIT INTERNSHIP FORM
+    ================================ */
+    document.getElementById('postInternshipForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('✅ Online internship posted successfully!');
-      // You can submit via fetch() to your backend here
+
+      const formData = new FormData(this);
+
+      fetch('backend/company/post_internship.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.status === 'SUCCESS') {
+            alert('Internship Posted Successfully');
+            this.reset();
+          } else {
+            alert(res.message);
+          }
+        });
     });
+
   </script>
 </body>
+
 </html>
