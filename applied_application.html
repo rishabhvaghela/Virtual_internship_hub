@@ -20,74 +20,27 @@
   <section class="saved-internships">
     <h2>My Applications</h2>
 
-    <!-- Desktop: Table -->
-    <table class="applications-table">
-      <thead>
-        <tr>
-          <th>SR. NO</th>
-          <th>TITLE</th>
-          <th>STATUS</th>
-          <th>DETAILS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Web Development Intern</td>
-          <td><span class="status under-review">Under Review</span></td>
-          <td><button class="view-btn1">View Details</button></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Data Analyst Intern</td>
-          <td><span class="status interview-scheduled">Interview Scheduled</span></td>
-          <td><button class="view-btn1">View Details</button></td>
-        </tr>
-      </tbody>
-    </table>
+   <!-- Desktop: Table -->
+<table class="applications-table">
+  <thead>
+    <tr>
+      <th>SR. NO</th>
+      <th>TITLE</th>
+      <th>STATUS</th>
+      <th>DETAILS</th>
+    </tr>
+  </thead>
+  <tbody id="applicationsTableBody">
+    <!-- Dynamic rows here -->
+  </tbody>
+</table>
 
-    <!-- Mobile: Cards -->
-    <div class="applications-cards">
-      <div class="application-card">
-        <div class="card-row">
-          <span class="card-label">SR. NO</span>
-          <span class="card-value">1</span>
-        </div>
-        <div class="card-row">
-          <span class="card-label">Title</span>
-          <span class="card-value">Web Development Intern</span>
-        </div>
-        <div class="card-row card-status">
-          <span class="card-label">Status</span>
-          <span class="card-value">
-            <span class="status under-review">Under Review</span>
-          </span>
-        </div>
-        <div class="card-actions">
-          <button class="view-btn1">View Details</button>
-        </div>
-      </div>
+<!-- Mobile: Cards -->
+<div class="applications-cards" id="applicationsCards">
+  <!-- Dynamic cards here -->
+</div>
 
-      <div class="application-card">
-        <div class="card-row">
-          <span class="card-label">SR. NO</span>
-          <span class="card-value">2</span>
-        </div>
-        <div class="card-row">
-          <span class="card-label">Title</span>
-          <span class="card-value">Data Analyst Intern</span>
-        </div>
-        <div class="card-row card-status">
-          <span class="card-label">Status</span>
-          <span class="card-value">
-            <span class="status interview-scheduled">Interview Scheduled</span>
-          </span>
-        </div>
-        <div class="card-actions">
-          <button class="view-btn1">View Details</button>
-        </div>
-      </div>
-    </div>
+<script src="assets/js/applied_application.js"></script>
   </section>
 </body>
 </html>

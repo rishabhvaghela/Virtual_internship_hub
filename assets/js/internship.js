@@ -4,12 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initFilters();
 });
 
+
+
 /* =========================
    LOAD INTERNSHIPS
 ========================= */
 function loadInternships() {
   fetch("backend/student/get_internships.php")
-  
+
     .then(res => {
       if (!res.ok) throw new Error("Network error");
       return res.json();
@@ -44,13 +46,19 @@ function loadInternships() {
       const emptyBox = document.getElementById("noInternship");
       if (emptyBox) emptyBox.style.display = "block";
     });
-    
+
 }
 
 /* =========================
    CREATE CARD
 ========================= */
 function createCard(data) {
+
+  console.log("Internship:", data.title, "Status:", data.status);
+
+  // ✅ ADD THIS LINE (Status check logic)
+  const isClosed = data.status?.toLowerCase() === "closed";
+
   const card = document.createElement("div");
   card.className = "internship-card";
 
@@ -89,14 +97,21 @@ function createCard(data) {
     </div>
 
     <div class="card-footer">
-      <button class="apply-btn" data-id="${data.id}">
-        Apply Now
+      <button class="apply-btn" data-id="${data.id}" ${isClosed ? "disabled" : ""}
+      >
+        ${isClosed ? "Internship Closed" : "Apply"}
       </button>
     </div>
   `;
 
   return card;
 }
+
+{/* <button class="apply-btn"
+              // ${isClosed ? "disabled" : ""}
+      >
+         ${isClosed ? "Internship Closed" : "Apply"}
+      </button> */}
 
 
 /* =========================
@@ -145,18 +160,27 @@ function initApplyButtons() {
   const cameFromHome = document.referrer.includes("index.html");
 
   document.querySelectorAll(".apply-btn").forEach(btn => {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function (e) {
+
+      // ✅ STOP if internship is closed
+      if (this.disabled) {
+        e.preventDefault();
+        return;
+      }
+
       if (cameFromHome) {
         alert("⚠️ Please login as a student before applying!");
         return;
       }
 
       const internshipId = this.dataset.id;
-      window.location.href =
-        "apply.html?internship_id=" + internshipId + "&from=internship";
+      window.location.href = "apply.html?id=" + internshipId + "&from=internship";
     });
   });
 }
+
+
+
 
 /* =========================
    BACK BUTTON
