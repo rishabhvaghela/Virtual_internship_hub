@@ -32,52 +32,60 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     data.data.forEach((app, index) => {
 
-        
-        const statusClass = app.status.toLowerCase().replace(" ", "-");
-        console.log(app.status);
-        
-      // Desktop row
+      const statusClass = app.status.toLowerCase().replace("_", "-");
+
+      const interviewDate = app.interview_date
+        ? new Date(app.interview_date).toLocaleString()
+        : "—";
+
+      // ======================
+      // DESKTOP TABLE
+      // ======================
+
       tableHTML += `
         <tr>
           <td>${index + 1}</td>
           <td>${app.title}</td>
           <td>
             <span class="status ${statusClass}">
-              ${app.status}
+              ${app.status.replace("_", " ")}
             </span>
           </td>
-          <td>
-            <button class="view-btn1" data-id="${app.id}">
-              View Details
-            </button>
-          </td>
+          <td>${interviewDate}</td>
         </tr>
       `;
 
-      // Mobile card
+      // ======================
+      // MOBILE CARDS
+      // ======================
+
       cardsHTML += `
         <div class="application-card">
+
           <div class="card-row">
             <span class="card-label">SR. NO</span>
             <span class="card-value">${index + 1}</span>
           </div>
+
           <div class="card-row">
             <span class="card-label">Title</span>
             <span class="card-value">${app.title}</span>
           </div>
-          <div class="card-row card-status">
+
+          <div class="card-row">
             <span class="card-label">Status</span>
             <span class="card-value">
               <span class="status ${statusClass}">
-                ${app.status}
+                ${app.status.replace("_", " ")}
               </span>
             </span>
           </div>
-          <div class="card-actions">
-            <button class="view-btn1" data-id="${app.id}">
-              View Details
-            </button>
+
+          <div class="card-row">
+            <span class="card-label">Interview</span>
+            <span class="card-value">${interviewDate}</span>
           </div>
+
         </div>
       `;
     });
@@ -86,6 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     cardsContainer.innerHTML = cardsHTML;
 
   } catch (err) {
+    console.log("JS Error:", err);
     tableBody.innerHTML = `
       <tr>
         <td colspan="4">Server error. Please try again.</td>

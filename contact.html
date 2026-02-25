@@ -6,6 +6,46 @@
     <title>Contact Us - Virtual Internship Hub</title>
     <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
     <link rel="stylesheet" href="assets/css/contact.css">
+    <style>
+        .custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: #fff;
+    padding: 25px;
+    width: 350px;
+    border-radius: 8px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content h3 {
+    margin-bottom: 10px;
+}
+
+.modal-content button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.close-btn {
+    float: right;
+    font-size: 18px;
+    cursor: pointer;
+}
+    </style>
 </head>
 <body>
 
@@ -55,7 +95,14 @@
             <p><strong>Hours:</strong> Mon-Fri, 9 AM - 5 PM (GMT)</p>
         </div>
     </div>
-
+<div id="responseModal" class="custom-modal">
+    <div class="modal-content">
+        <span id="modalClose" class="close-btn">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button id="modalOkBtn">OK</button>
+    </div>
+</div>
 <script src="assets/js/contact.js"></script>
 </body>
 </html>

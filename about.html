@@ -99,15 +99,15 @@
             let homeUrl = "index.html"; // Default fallback
 
             if (from === 'student') {
-                homeUrl = "student_dashboard.html";
+                homeUrl = "student_dashboard.php";
             } else if (from === 'company') {
-                homeUrl = "company_dashboard.html";
+                homeUrl = "company_dashboard.php";
             } else if (from === 'home') {
                 homeUrl = "index.html";
             }
 
             backLink.href = homeUrl;
-            backLink.textContent = '<img src="assets/svg/cancel.svg">' ` ${homeUrl === 'index.html' ? 'Home' : homeUrl === 'student_dashboard.html' ? 'Student Dashboard' : homeUrl === 'company_dashboard.html' ? 'Company Dashboard' : 'home'}`;
+            backLink.textContent = '<img src="assets/svg/cancel.svg">' ` ${homeUrl === 'index.html' ? 'Home' : homeUrl === 'student_dashboard.php' ? 'Student Dashboard' : homeUrl === 'company_dashboard.php' ? 'Company Dashboard' : 'home'}`;
 
         });
     </script>

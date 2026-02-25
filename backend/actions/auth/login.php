@@ -43,7 +43,7 @@ if (!$user) {
 }
 
 // ---------- PASSWORD VERIFY ----------
-if ($password !== $user['password']) {
+if (!password_verify($password, $user['password'])) {
     echo "Incorrect password";
     exit;
 }
@@ -53,6 +53,9 @@ if ($user['role'] !== $role) {
     echo "Role mismatch";
     exit;
 }
+
+session_regenerate_id(true);
+
 
 // ---------- SESSION SET ----------
 $_SESSION['user_id'] = $user['id'];
@@ -68,3 +71,4 @@ if ($user['role'] === 'student') {
 } else {
     echo "Login failed";
 }
+

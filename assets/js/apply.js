@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const from = params.get("from");
       window.location.href =
-        from === "student" ? "student_dashboard.html" : "index.html";
+        from === "student" ? "student_dashboard.php" : "index.html";
     }
   });
 
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!internshipId) {
     alert("Invalid internship");
-    window.location.href = "student_dashboard.html";
+    window.location.href = "student_dashboard.php";
     return;
   }
 

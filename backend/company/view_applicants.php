@@ -21,7 +21,9 @@ SELECT
     i.title AS internship_title,
     a.status,
     a.resume,
-    a.cover_letter
+    a.cover_letter,
+    a.interview_date,
+    a.interview_note
 FROM applications a
 JOIN student_profile s ON a.student_id = s.user_id
 JOIN internships i ON a.internship_id = i.id

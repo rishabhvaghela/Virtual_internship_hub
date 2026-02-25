@@ -135,8 +135,8 @@ try {
 try {
     $stmt = $pdo->prepare("
         INSERT INTO applications
-        (student_id, internship_id, resume, cover_letter, applied_at)
-        VALUES (?, ?, ?, ?, NOW())
+        (student_id, internship_id, resume, cover_letter,status, applied_at)
+        VALUES (?, ?, ?, ?,'applied', NOW())
     ");
     $stmt->execute([$student_id, $internship_id, $resume, $cover]);
 

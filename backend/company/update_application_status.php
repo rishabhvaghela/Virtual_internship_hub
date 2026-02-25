@@ -1,77 +1,51 @@
 <?php
 session_start();
-require_once "../config/db.php";
-
+require_once __DIR__ . '/../config/config.php';
 header("Content-Type: application/json");
 
-// Authorization check
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'company') {
-    echo json_encode([
-        "success" => false,
-        "message" => "Unauthorized"
-    ]);
+    echo json_encode(["success" => false, "message" => "Unauthorized"]);
     exit;
 }
 
-// Read raw input
-$raw = file_get_contents("php://input");
-$data = json_decode($raw, true);
+$data = json_decode(file_get_contents("php://input"), true);
 
-// Fallback to POST
-if (!is_array($data)) {
-    $data = $_POST;
-}
+$application_id = $data['application_id'] ?? null;
+$status = $data['status'] ?? null;
 
-// Validate required fields
-if (
-    !isset($data['application_id'], $data['status']) ||
-    trim($data['application_id']) === '' ||
-    trim($data['status']) === ''
-) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid data",
-        "received" => $data
-    ]);
-    exit;
-}
+$allowed = ['accepted','rejected'];
 
-$application_id = (int)$data['application_id'];
-$status = strtolower(trim($data['status']));
-
-// Allowed values (ACCEPTED enabled)
-$allowedStatuses = ['applied', 'accepted', 'rejected'];
-
-if (!in_array($status, $allowedStatuses, true)) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid status value"
-    ]);
+if (!$application_id || !in_array($status, $allowed)) {
+    echo json_encode(["success" => false, "message" => "Invalid data"]);
     exit;
 }
 
 try {
 
-    $stmt = $conn->prepare("UPDATE applications SET status = ? WHERE id = ?");
-    $stmt->execute([$status, $application_id]);
+    if ($status === 'rejected') {
 
-    if ($stmt->rowCount() === 0) {
-        echo json_encode([
-            "success" => false,
-            "message" => "Application not found or already updated"
-        ]);
-        exit;
+        $stmt = $pdo->prepare("
+            UPDATE applications 
+            SET 
+                status = 'rejected',
+                interview_date = NULL,
+                interview_note = NULL
+            WHERE id = ?
+        ");
+        $stmt->execute([$application_id]);
+
+    } else {
+
+        $stmt = $pdo->prepare("
+            UPDATE applications 
+            SET status = 'accepted'
+            WHERE id = ?
+        ");
+        $stmt->execute([$application_id]);
     }
 
-    echo json_encode([
-        "success" => true,
-        "message" => "Status updated successfully"
-    ]);
+    echo json_encode(["success" => true]);
 
 } catch (PDOException $e) {
-
-    echo json_encode([
-        "success" => false,
-        "message" => "Database error"
-    ]);
+    echo json_encode(["success" => false]);
 }

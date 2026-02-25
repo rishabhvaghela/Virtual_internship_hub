@@ -43,6 +43,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </span>
             </div>
 
+            ${
+              app.scheduled_at
+                ? `
+                <div class="applicant-detail">
+                    <span>Interview:</span>
+                    <span>${new Date(app.scheduled_at).toLocaleString()}</span>
+                </div>
+                `
+                : ""
+            }
+
             <div class="action-buttons">
                 <button class="action-btn btn-view-resume">
                     View Resume
@@ -51,6 +62,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <button class="action-btn btn-cover">
                     Cover Letter
                 </button>
+
+${
+  app.status !== "rejected"
+    ? `<button class="action-btn btn-interview">
+        ${app.scheduled_at ? "Reschedule Interview" : "Schedule Interview"}
+       </button>`
+    : ""
+}
 
                 <button class="action-btn btn-accept">
                     Accept
@@ -70,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           );
         });
 
-        // Cover Letter Modal
+        // Cover Letter
         card.querySelector(".btn-cover").addEventListener("click", () => {
           showCoverModal(app.cover_letter);
         });
@@ -84,6 +103,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.querySelector(".btn-reject").addEventListener("click", () => {
           updateStatus(app.application_id, "rejected");
         });
+
+        // Schedule Interview
+        if (app.status !== "rejected") {
+          card.querySelector(".btn-interview").addEventListener("click", () => {
+            showInterviewModal(app.application_id);
+          });
+        }
 
         container.appendChild(card);
       });
@@ -106,8 +132,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const result = await res.json();
 
     if (result.success) {
-
-      // ✅ SUCCESS MODAL ADD KIYA GAYA HAI
       showStatusModal(
         status === "accepted" ? "success" : "reject",
         status === "accepted"
@@ -116,7 +140,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
 
       loadApplicants();
-      
     } else {
       alert(result.message);
     }
@@ -137,7 +160,66 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.body.appendChild(modal);
   }
 
-  // ✅ SUCCESS MODAL FUNCTION ADD KIYA GAYA HAI
+  function showInterviewModal(applicationId) {
+
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h3>Schedule Interview</h3>
+
+        <label>Date</label>
+        <input type="date" id="interviewDate" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:8px;border:none;">
+
+        <label>Time</label>
+        <input type="time" id="interviewTime" required style="width:100%;margin-bottom:10px;padding:8px;border-radius:8px;border:none;">
+
+        <label>Note (Optional)</label>
+        <textarea id="interviewNote" style="width:100%;padding:8px;border-radius:8px;border:none;"></textarea>
+
+        <button id="scheduleBtn">Schedule</button>
+        <button onclick="this.closest('.modal').remove()">Cancel</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById("scheduleBtn").addEventListener("click", async () => {
+
+      const date = document.getElementById("interviewDate").value;
+      const time = document.getElementById("interviewTime").value;
+      const note = document.getElementById("interviewNote").value;
+
+      if (!date || !time) {
+        alert("Please select date and time");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("application_id", applicationId);
+      formData.append("date", date);
+      formData.append("time", time);
+      formData.append("note", note);
+
+      const res = await fetch("backend/company/schedule_interview.php", {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        modal.remove();
+        showStatusModal("success", "Interview scheduled successfully.");
+        loadApplicants();
+      } else {
+        alert(result.message);
+      }
+
+    });
+  }
+
   function showStatusModal(type, message) {
 
     const modal = document.createElement("div");
@@ -148,7 +230,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="icon">
             ${type === "success" ? "✔" : "✖"}
           </div>
-          <h4>${type === "success" ? "Status Updated" : "Application Rejected"}</h4>
+          <h4>${type === "success" ? "Success" : "Rejected"}</h4>
           <p>${message}</p>
       </div>
     `;

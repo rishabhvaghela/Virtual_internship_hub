@@ -33,14 +33,14 @@ if (!$data) {
 }
 
 //  Password update
-// $hashed = password_hash($password, PASSWORD_DEFAULT);
+ $hashed = password_hash($password, PASSWORD_DEFAULT);
 
 $update = $pdo->prepare("
     UPDATE users 
     SET password = ?
     WHERE email = ?
 ");
-$update->execute([$password, $data['email']]);
+$update->execute([$hashed, $data['email']]);
 
 //  Token delete
 $pdo->prepare("DELETE FROM password_resets WHERE email = ?")

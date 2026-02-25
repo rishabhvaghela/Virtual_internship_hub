@@ -174,7 +174,7 @@ function initApplyButtons() {
       }
 
       const internshipId = this.dataset.id;
-      window.location.href = "apply.html?id=" + internshipId + "&from=internship";
+      window.location.href = "apply.php?id=" + internshipId + "&from=internship";
     });
   });
 }

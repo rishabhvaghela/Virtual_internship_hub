@@ -23,7 +23,7 @@ $role     = $_POST['role'] ?? 'student';
 */
 
 // ---------- INSERT USER ----------
-// $hashed = password_hash($password, PASSWORD_DEFAULT);
+ $hashed = password_hash($password, PASSWORD_DEFAULT);
 
 // $insert = $pdo->prepare("
 //     INSERT INTO users (name, email, password, role, is_verified)
@@ -39,7 +39,7 @@ $pdo->prepare("DELETE FROM pending_users WHERE email = ?")
 $pdo->prepare("
 INSERT INTO pending_users (name, email, password, role)
 VALUES (?, ?, ?, ?)
-")->execute([$name, $email, $password, $role]);
+")->execute([$name, $email, $hashed, $role]);
 
 
 // ---------- OTP GENERATE ----------

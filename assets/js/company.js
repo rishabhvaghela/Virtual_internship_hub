@@ -2,11 +2,11 @@
 const post_internship = document.getElementById('post-internship');
 
 view_applicants.addEventListener('click', ()=>{
-  window.location.href = "view_applicants.html";
+  window.location.href = "view_applicants.php";
 })
 
 post_internship.addEventListener('click', ()=>{
-  window.location.href = "post_internship.html";
+  window.location.href = "post_internship.php";
 })
 
 
@@ -125,14 +125,14 @@ function updateInternship(e) {
     department: document.getElementById("department").value,
     location: document.getElementById("location").value,
     startDate: document.getElementById("startDate").value,
-    endDate: document.getElementById("endDate").value, // ✅ ADDED
+    endDate: document.getElementById("endDate").value, 
     duration: document.getElementById("duration").value,
     stipend: document.getElementById("stipend").value,
     skills: document.getElementById("skills").value,
     description: document.getElementById("description").value
   };
 
-  fetch("backend/company/update_internship.php", {
+  fetch("/virtual_internship_hub/backend/company/update_internship.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)

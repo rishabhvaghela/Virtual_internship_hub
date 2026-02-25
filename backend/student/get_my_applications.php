@@ -16,20 +16,21 @@ $student_id = $_SESSION['user_id'];
 
 try {
     $stmt = $pdo->prepare("
-        SELECT 
-            a.id,
-            i.title,
-            i.end_date,
-            u.name AS company_name,
-            a.status,
-            a.applied_at
-        FROM applications a
-        JOIN internships i ON a.internship_id = i.id
-        JOIN users u ON i.company_id = u.id
-        WHERE a.student_id = ?
-        ORDER BY a.applied_at DESC
-    ");
-
+SELECT 
+    a.id,
+    i.title,
+    i.end_date,
+    u.name AS company_name,
+    a.status,
+    a.applied_at,
+    a.interview_date,
+    a.interview_note
+FROM applications a
+JOIN internships i ON a.internship_id = i.id
+JOIN users u ON i.company_id = u.id
+WHERE a.student_id = ?
+ORDER BY a.applied_at DESC
+");
     $stmt->execute([$student_id]);
     $applications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -37,7 +38,6 @@ try {
         "success" => true,
         "data" => $applications
     ]);
-
 } catch (PDOException $e) {
     echo json_encode([
         "success" => false,

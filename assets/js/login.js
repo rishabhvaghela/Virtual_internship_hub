@@ -170,7 +170,7 @@ form.addEventListener("submit", async (e) => {
 
             setTimeout(() => {
 
-                window.location.href = "student_dashboard.html"
+                window.location.href = "student_dashboard.php"
             }, 700);
         }
         else if (result == "COMPANY_LOGIN") {
@@ -178,7 +178,7 @@ form.addEventListener("submit", async (e) => {
             password.classList.add("success-input");
             role.classList.add("success-input");
             setTimeout(() => {
-                window.location.href = "company_dashboard.html"
+                window.location.href = "company_dashboard.php"
             }, 700);
         }
 
