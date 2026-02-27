@@ -7,10 +7,11 @@ require_once "backend/actions/auth/session_check.php";
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>View Applicants – Company Dashboard</title>
-    <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
-    <link rel="stylesheet" href="assets/css/view_applicants.css">
-    <style>
+    <title>View Applicants Ã¢â‚¬â€œ Company Dashboard</title>
+    
+  <link rel="stylesheet" href="assets/css/view_applicants.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+<style>
         /* ===============================
    COVER LETTER MODAL - MODERN UI
 =================================*/

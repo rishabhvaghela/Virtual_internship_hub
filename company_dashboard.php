@@ -8,8 +8,9 @@ require_once "backend/actions/auth/session_check.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Company dasshboard</title>
+
   <link rel="stylesheet" href="assets/css/company.css">
-  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
+  <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 
 <body>
@@ -34,7 +35,7 @@ require_once "backend/actions/auth/session_check.php";
         </div>
       </div>
 
-      <div class="toggle" id="toggle">⋮</div>
+      <div class="toggle" id="toggle">Ã¢â€¹Â®</div>
 
     </nav>
   </header>

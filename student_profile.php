@@ -3,13 +3,16 @@ require_once "backend/actions/auth/session_check.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+
+
+  <link rel="stylesheet" href="assets/css/profile.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile | Virtual Internship Hub</title>
-    <link rel="stylesheet" href="assets/css/profile.css">
-<!-- <link rel="stylesheet" href="assets/css/cropper/cropper.min.css"> -->
+<!-- 
+-->
     <link rel="shortcut icon" href="assets/images/logo/Web Icon.png" type="image/x-icon">
 
 </head>

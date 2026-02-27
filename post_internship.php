@@ -9,8 +9,9 @@ require_once "backend/actions/auth/session_check.php";
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post Online Internship</title>
-  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
+  
   <link rel="stylesheet" href="assets/css/post_internship.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 
 <body>
@@ -69,7 +70,7 @@ require_once "backend/actions/auth/session_check.php";
 
         <div class="form-group">
           <label for="stipend">Stipend (per month)</label>
-          <input type="text" id="stipend" name="stipend" placeholder="e.g., ₹10,000 or 'Unpaid'" />
+          <input type="text" id="stipend" name="stipend" placeholder="e.g., Ã¢â€šÂ¹10,000 or 'Unpaid'" />
         </div>
 
         <div class="form-group">
