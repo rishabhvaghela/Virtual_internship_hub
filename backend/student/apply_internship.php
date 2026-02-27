@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../mail/send_mail.php';
 
 // ----------------------------
 // Force JSON output and clean any accidental output
@@ -120,7 +121,7 @@ try {
         exit;
     }
 
-    $resume = $profile['resume']; // This will be used in applications table
+    $resume = $profile['resume'];
 } catch (PDOException $e) {
     echo json_encode([
         "success" => false,
@@ -133,14 +134,78 @@ try {
    INSERT APPLICATION
 ====================== */
 try {
+
     $stmt = $pdo->prepare("
         INSERT INTO applications
-        (student_id, internship_id, resume, cover_letter,status, applied_at)
-        VALUES (?, ?, ?, ?,'applied', NOW())
+        (student_id, internship_id, resume, cover_letter, status, applied_at)
+        VALUES (?, ?, ?, ?, 'applied', NOW())
     ");
+
     $stmt->execute([$student_id, $internship_id, $resume, $cover]);
 
-    // Clear output buffer to prevent accidental output before JSON
+
+    /* ======================
+        SEND EMAIL TO STUDENT
+    ====================== */
+
+    /* ======================
+    SEND EMAIL TO STUDENT + COMPANY
+====================== */
+
+    try {
+
+        $stmt = $pdo->prepare("
+            SELECT 
+                u.email as student_email,
+                u.name as student_name,
+                i.title,
+                c.name as company_name,
+                c.email as company_email
+            FROM users u
+            JOIN internships i ON i.id=?
+            JOIN users c ON i.company_id=c.id
+            WHERE u.id=?
+            ");
+
+        $stmt->execute([$internship_id, $student_id]);
+
+        $info = $stmt->fetch();
+
+        if ($info) {
+
+            // ============================
+            // EMAIL TO STUDENT
+            // ============================
+
+            sendApplicationConfirmation(
+
+                $info['student_email'],
+                $info['student_name'],
+                $info['title'],
+                $info['company_name']
+
+            );
+
+
+            // ============================
+            // EMAIL TO COMPANY (NEW)
+            // ============================
+
+            sendCompanyNewApplicantEmail(
+
+                $info['company_email'],
+                $info['company_name'],
+                $info['student_name'],
+                $info['student_email'],
+                $info['title']
+
+            );
+        }
+    } catch (Exception $e) {
+        // do nothing if email fails
+    }
+
+
     ob_end_clean();
 
     echo json_encode([
@@ -149,10 +214,11 @@ try {
         "resume" => $resume
     ]);
 } catch (PDOException $e) {
+
     ob_end_clean();
+
     echo json_encode([
         "success" => false,
         "message" => "Database error: " . $e->getMessage()
     ]);
-    exit;
 }

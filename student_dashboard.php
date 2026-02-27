@@ -22,10 +22,10 @@ require_once "backend/actions/auth/session_check.php";
       </div>
       <div class="menu" id="menu">
         <ul>
-          <form class="search-form">
+          <!-- <form class="search-form">
             <input type="text" placeholder="Search internships..." />
             <button type="submit"><img src="assets/svg/search.svg" alt=""></button>
-          </form>
+          </form> -->
           <li><a href="student_dashboard.php">Home</a></li>
           <li><a href="student_profile.php">Profile</a></li>
           <li><a href="internship.html?from=student">Internships</a></li>
