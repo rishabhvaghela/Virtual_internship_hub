@@ -9,9 +9,8 @@ require_once "backend/actions/auth/session_check.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Dashboard</title>
-
   <link rel="stylesheet" href="assets/css/student.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
 </head>
 
 <body>
@@ -40,7 +39,7 @@ require_once "backend/actions/auth/session_check.php";
         </div>
       </div>
 
-      <div class="toggle" id="toggle">Ã¢â€¹Â®</div>
+      <div class="toggle" id="toggle">⋮</div>
 
     </nav>
   </header>
@@ -50,7 +49,7 @@ require_once "backend/actions/auth/session_check.php";
     <!-- Hero Section -->
     <section class="welcome">
       <div class="welcome-container">
-        <h1>Welcome, Students Ã°Å¸â€˜â€¹</h1>
+        <h1>Welcome, Students 👋</h1>
         <p>Glad to have you back! Explore internships, update your profile, and start your journey today.</p>
         <a href="internship.html?from=student" class="btn">Explore Internships</a>
       </div>

@@ -9,9 +9,8 @@ require_once "backend/actions/auth/session_check.php";
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apply for Internship</title>
 
-  
-  <link rel="stylesheet" href="assets/css/apply.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
+  <link rel="stylesheet" href="assets/css/apply.css" />
 </head>
 <body>
 

@@ -1,3 +1,7 @@
+<?php
+require_once "backend/actions/auth/session_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Company Profile</title>
 
-  
-  <link rel="stylesheet" href="assets/css/company-profile.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
+  <link rel="stylesheet" href="assets/css/company-profile.css" />
 </head>
 <body>
 

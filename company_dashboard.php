@@ -8,9 +8,8 @@ require_once "backend/actions/auth/session_check.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Company dasshboard</title>
-
   <link rel="stylesheet" href="assets/css/company.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
 </head>
 
 <body>
@@ -23,7 +22,7 @@ require_once "backend/actions/auth/session_check.php";
       <div class="menu" id="menu">
         <ul>
           <li><a href="company_dashboard.php">Home</a></li>
-          <li><a href="company_profile.html">Profile</a></li>
+          <li><a href="company_profile.php">Profile</a></li>
           <li><a href="post_internship.php">Post Internships</a></li>
           <li><a href="view_applicants.php">View Applicants</a></li>
           <li><a href="about.html?from=company">About</a></li>
@@ -35,7 +34,7 @@ require_once "backend/actions/auth/session_check.php";
         </div>
       </div>
 
-      <div class="toggle" id="toggle">Ã¢â€¹Â®</div>
+      <div class="toggle" id="toggle">⋮</div>
 
     </nav>
   </header>
@@ -100,6 +99,11 @@ require_once "backend/actions/auth/session_check.php";
   <!-- EDIT INTERNSHIP MODAL -->
 <div id="editModal" class="modal">
   <div class="modal-content">
+
+  <!-- Back Button -->
+<a id="backLink" class="back-btn" href="company_dashboard.php">
+  <img src="assets/svg/cancel.svg" alt="">
+</a>
 
     <h3>Edit Internship</h3>
 

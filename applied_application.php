@@ -8,11 +8,10 @@ require_once "backend/actions/auth/session_check.php";
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Applications</title>
-  
-  <link rel="stylesheet" href="assets/css/applied.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
-<!-- Font Awesome Icons / means class me fa-house likhne se home ka icon -->
+  <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png" />
+  <!-- Font Awesome Icons / means class me fa-house likhne se home ka icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/applied.css" />
 </head>
 <body>
 

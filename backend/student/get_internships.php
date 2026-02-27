@@ -1,54 +1,90 @@
 <?php
-require_once __DIR__ . '/../config/config.php';
+
+header('Content-Type: application/json');
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-/* ---------- AUTH CHECK ---------- */
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
-    http_response_code(401);
-    echo json_encode([
-        "status" => "ERROR",
-        "message" => "Unauthorized"
-    ]);
-    exit;
+require_once __DIR__ . '/../config/config.php';
+
+
+/* ---------- CHECK LOGIN STATUS ---------- */
+
+$is_logged_in = false;
+$is_student = false;
+$user_id = null;
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+
+    $is_logged_in = true;
+    $user_id = $_SESSION['user_id'];
+
+    if ($_SESSION['role'] === 'student') {
+        $is_student = true;
+    }
 }
 
+
 /* ---------- FETCH INTERNSHIPS ---------- */
-$stmt = $pdo->prepare("
-    SELECT 
-        i.id,
-        i.title,
-        i.department,
-        i.location,
-        i.type,
-        i.start_date,
-        i.end_date,
-        i.duration_weeks,
-        i.stipend,
-        i.skills,
-        i.description,
-        i.created_at,
 
-        CASE 
-            WHEN i.end_date < CURDATE() THEN 'closed'
-            ELSE 'open'
-        END AS status,
+try {
 
-        u.name AS company_name
+    $stmt = $pdo->prepare("
+        SELECT 
+            i.id,
+            i.title,
+            i.department,
+            i.location,
+            i.type,
+            i.start_date,
+            i.end_date,
+            i.duration_weeks,
+            i.stipend,
+            i.skills,
+            i.description,
+            i.created_at,
 
-    FROM internships i
-    JOIN users u ON u.id = i.company_id
-    ORDER BY i.created_at DESC
-");
+            CASE 
+                WHEN i.end_date < CURDATE() THEN 'closed'
+                ELSE 'open'
+            END AS status,
 
-$stmt->execute();
-$internships = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            u.name AS company_name
 
-/* ---------- RESPONSE ---------- */
-echo json_encode([
-    "status" => "SUCCESS",
-    "count" => count($internships),
-    "data" => $internships
-]);
+        FROM internships i
+        JOIN users u ON u.id = i.company_id
+        ORDER BY i.created_at DESC
+    ");
+
+    $stmt->execute();
+
+    $internships = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    /* ---------- ADD APPLY PERMISSION FLAG ---------- */
+
+    foreach ($internships as &$internship) {
+
+        $internship['can_apply'] = $is_student;
+        $internship['login_required'] = !$is_logged_in;
+    }
+
+
+    echo json_encode([
+        "status" => "SUCCESS",
+        "is_logged_in" => $is_logged_in,
+        "is_student" => $is_student,
+        "count" => count($internships),
+        "data" => $internships
+    ]);
+
+} catch (Exception $e) {
+
+    http_response_code(500);
+
+    echo json_encode([
+        "status" => "ERROR",
+        "message" => $e->getMessage()
+    ]);
+}

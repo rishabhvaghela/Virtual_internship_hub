@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Virtual Internship Hub</title>
     <link rel="icon" type="image/png" href="assets/images/logo/Web Icon.png">
-    <link rel="stylesheet" href="assets/css/theme.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,47 +14,54 @@
             background-color: #f5f7fa;
             color: #333;
         }
+
         header {
             background-color: black;
             color: white;
             padding: 1.5rem;
             text-align: center;
         }
+
         .container {
             max-width: 900px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-    .back-btn {
-      text-decoration: none;
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-color:rgb(220, 7, 7);
-      padding: 5px 5px 0 5px;
-      transition: 0.4s ;
-    }
 
-    .back-btn:hover{
-      background-color:rgb(174, 10, 10);
-      transition: 0.4s ;
-    }
-        h1, h2 {
+        .back-btn {
+            text-decoration: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: rgb(220, 7, 7);
+            padding: 5px 5px 0 5px;
+            transition: 0.4s;
+        }
+
+        .back-btn:hover {
+            background-color: rgb(174, 10, 10);
+            transition: 0.4s;
+        }
+
+        h1,
+        h2 {
             color: white;
         }
+
         p {
             line-height: 1.7;
         }
     </style>
 </head>
+
 <body>
 
-     <!-- Dynamic Back Button -->
+    <!-- Dynamic Back Button -->
     <a id="backLink" class="back-btn" href="#">
-    <img src="assets/svg/cancel.svg" alt="">
+        <img src="assets/svg/cancel.svg" alt="">
     </a>
 
     <header>
@@ -66,33 +73,39 @@
 
         <h2>About Us</h2>
         <p>
-            Welcome to the <strong>Virtual Internship Hub</strong> Ã¢â‚¬â€ a dynamic platform designed to connect motivated students with innovative companies seeking fresh talent. 
-            Our mission is to democratize internship opportunities by removing geographical and logistical barriers through virtual collaboration.
+            Welcome to the <strong>Virtual Internship Hub</strong> — a dynamic platform designed to connect motivated
+            students with innovative companies seeking fresh talent.
+            Our mission is to democratize internship opportunities by removing geographical and logistical barriers
+            through virtual collaboration.
         </p>
 
         <h2>Our Vision</h2>
         <p>
-            We envision a world where every student, regardless of location or background, has access to meaningful internship experiences that prepare them for future careers.
+            We envision a world where every student, regardless of location or background, has access to meaningful
+            internship experiences that prepare them for future careers.
         </p>
 
         <h2>For Students</h2>
         <p>
-            Browse and apply to virtual internships tailored to your skills and interests. Track applications, communicate with mentors, and build your professional portfolio Ã¢â‚¬â€ all in one place.
+            Browse and apply to virtual internships tailored to your skills and interests. Track applications,
+            communicate with mentors, and build your professional portfolio — all in one place.
         </p>
 
         <h2>For Companies</h2>
         <p>
-            Post internship opportunities, review candidate profiles, conduct virtual interviews, and onboard interns seamlessly. Tap into a global talent pool without the overhead.
+            Post internship opportunities, review candidate profiles, conduct virtual interviews, and onboard interns
+            seamlessly. Tap into a global talent pool without the overhead.
         </p>
 
         <h2>Get in Touch</h2>
         <p>
-            Have questions or feedback? <a href="mailto:support@virtualinternshiphub.com">Contact our team</a> Ã¢â‚¬â€ we'd love to hear from you!
+            Have questions or feedback? <a href="mailto:support@virtualinternshiphub.com">Contact our team</a> — we'd
+            love to hear from you!
         </p>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const backLink = document.getElementById("backLink");
             const urlParams = new URLSearchParams(window.location.search);
             const from = urlParams.get('from');
@@ -114,6 +127,5 @@
     </script>
 
 </body>
-</html>
 
-  
+</html>
