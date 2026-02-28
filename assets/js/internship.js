@@ -1,3 +1,37 @@
+/* =========================
+LOADER CONTROL
+========================= */
+
+function showLoader() {
+  const loader = document.getElementById("pageLoader");
+  if (loader) loader.style.display = "flex";
+}
+
+function hideLoader() {
+  const loader = document.getElementById("pageLoader");
+  if (loader) loader.style.display = "none";
+}
+
+/* =========================
+TOAST FUNCTION
+========================= */
+
+function showToast(message, type = "success") {
+
+  const container = document.getElementById("toastContainer");
+
+  const toast = document.createElement("div");
+  toast.className = "toast " + type;
+  toast.innerText = message;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   initBackButton();
   loadInternships();
@@ -19,51 +53,59 @@ let isStudentLoggedIn = false;
 
 async function loadInternships() {
 
+  showLoader();
+
   const grid = document.querySelector(".internship-grid");
   const emptyBox = document.getElementById("noInternship");
+
+  if (!grid) return;
+
+  /* SHOW SKELETON FIRST */
+  grid.innerHTML = "";
+
+  for (let i = 0; i < 6; i++) {
+
+    const skeleton = document.createElement("div");
+
+    skeleton.className = "skeleton-card";
+
+    skeleton.innerHTML = `
+      <div class="skeleton-line long"></div>
+      <div class="skeleton-line medium"></div>
+      <div class="skeleton-line short"></div>
+      <div class="skeleton-line long"></div>
+    `;
+
+    grid.appendChild(skeleton);
+
+  }
 
   try {
 
     const response = await fetch(
       "/virtual_internship_hub/backend/student/get_internships.php",
       {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Accept": "application/json"
-        }
+        credentials: "include"
       }
     );
 
-    if (!response.ok)
-      throw new Error("Server error");
-
     const result = await response.json();
-
-    console.log("Internship API:", result);
-
-    if (!grid) return;
 
     grid.innerHTML = "";
 
     internshipData = result.data || [];
 
-    // ✅ detect login state
-    if (internshipData.length > 0) {
+    if (internshipData.length > 0)
       isStudentLoggedIn = internshipData[0].can_apply === true;
-    }
 
     if (internshipData.length === 0) {
 
-      if (emptyBox)
-        emptyBox.style.display = "block";
-
+      emptyBox.style.display = "block";
       return;
+
     }
 
-    if (emptyBox)
-      emptyBox.style.display = "none";
-
+    emptyBox.style.display = "none";
 
     internshipData.forEach((item, index) => {
 
@@ -72,21 +114,28 @@ async function loadInternships() {
       grid.appendChild(card);
 
       setTimeout(() => {
+
         card.classList.add("visible");
+
       }, index * 100);
 
     });
-
 
     initApplyButtons();
 
   }
   catch (error) {
 
-    console.error("Load error:", error);
+    console.error(error);
 
-    if (emptyBox)
-      emptyBox.style.display = "block";
+    showToast("Failed to load internships", "error");
+
+    emptyBox.style.display = "block";
+
+  }
+  finally {
+
+    hideLoader();
 
   }
 
@@ -109,7 +158,7 @@ function createCard(data) {
 
   const workType =
     data.type &&
-    data.type.toLowerCase() === "remote"
+      data.type.toLowerCase() === "remote"
       ? "remote"
       : "onsite";
 
@@ -133,8 +182,8 @@ function createCard(data) {
 
         <span class="tag ${workType}">
           ${workType === "remote"
-            ? "Work From Home"
-            : "On Site"}
+      ? "Work From Home"
+      : "On Site"}
         </span>
 
         <span class="tag paid">Paid</span>
@@ -181,8 +230,8 @@ function createCard(data) {
       >
 
         ${isClosed
-          ? "Internship Closed"
-          : "Apply"}
+      ? "Internship Closed"
+      : "Apply"}
 
       </button>
 
@@ -206,22 +255,27 @@ function initApplyButtons() {
 
       btn.addEventListener("click", function () {
 
-        if (this.disabled)
-          return;
+        if (this.disabled) return;
+
+        this.classList.add("loading");
 
         const internshipId = this.dataset.id;
 
-        // ❌ NOT LOGGED IN → SHOW MODAL
         if (!isStudentLoggedIn) {
 
-          showLoginModal();
+          this.classList.remove("loading");
 
+          showLoginModal();
           return;
+
         }
 
-        // ✅ LOGGED IN → APPLY PAGE
-        window.location.href =
-          "apply.php?id=" + internshipId;
+        setTimeout(() => {
+
+          window.location.href =
+            "apply.php?id=" + internshipId;
+
+        }, 500);
 
       });
 
