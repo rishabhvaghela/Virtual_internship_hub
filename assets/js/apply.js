@@ -3,7 +3,43 @@
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("apply.js loaded");
+  /* =========================
+TOAST FUNCTION
+========================= */
+
+function showToast(message, type = "success") {
+
+  const container = document.getElementById("toastContainer");
+
+  const toast = document.createElement("div");
+  toast.className = "toast " + type;
+  toast.innerText = message;
+
+  container.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 3000);
+}
+
+/* =========================
+BUTTON LOADING STATE
+========================= */
+
+function setButtonLoading(button, loading) {
+
+  if (loading) {
+    button.classList.add("loading");
+    button.disabled = true;
+    button.dataset.original = button.innerText;
+    button.innerText = "Submitting...";
+  } else {
+    button.classList.remove("loading");
+    button.disabled = false;
+    button.innerText = button.dataset.original;
+  }
+
+}
+
+
 
   /* ---------------- BACK BUTTON ---------------- */
   const backLink = document.getElementById("backLink");
@@ -63,53 +99,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------------- APPLY FORM ---------------- */
   const form = document.getElementById("applyForm");
-  const msg  = document.getElementById("formMsg");
+  const submitBtn = document.getElementById("submitBtn");
 
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    msg.textContent = "";
+form.addEventListener("submit", async e => {
 
-    const cover = document.getElementById("cover").value.trim();
+  e.preventDefault();
 
-    if (!cover) {
-      msg.textContent = "Cover letter is required";
-      return;
+
+  const cover = document.getElementById("cover").value.trim();
+
+  if (!cover) {
+    // msg.textContent = "Cover letter is required";
+    showToast("Cover letter is required", "error");
+    return;
+  }
+
+  setButtonLoading(submitBtn, true);
+
+  const formData = new FormData();
+  formData.append("internship_id", internshipId);
+  formData.append("cover", cover);
+
+  try {
+
+    const res = await fetch("backend/student/apply_internship.php", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+
+      showToast("Application submitted successfully", "success");
+
+      // msg.textContent = "Applied Successfully.";
+
+      form.reset();
+
+      setTimeout(() => {
+        window.location.href = "student_dashboard.php";
+      }, 3000);
+
+    }
+    else {
+
+      showToast(data.message || "Application failed", "error");
+
+      // msg.textContent = data.message || "Application failed";
+
     }
 
-    const formData = new FormData();
-    formData.append("internship_id", internshipId);
-    formData.append("cover", cover);
+  }
+  catch (err) {
 
-    console.log("Submitting form:", { internshipId, cover });
+    showToast("Server error. Please try again.", "error");
 
-    try {
-      const res = await fetch("backend/student/apply_internship.php", {
-        method: "POST",
-        body: formData
-      });
+    // msg.textContent = "Server error.";
 
-      // Safely parse JSON
-      let data;
-      try {
-        data = await res.json();
-      } catch (jsonErr) {
-        console.error("JSON parse error:", jsonErr);
-        msg.textContent = "Server returned invalid response. Please try again.";
-        return;
-      }
+  }
+  finally {
 
-      console.log("Server response:", data);
+    setButtonLoading(submitBtn, false);
 
-      if (data.success) {
-        msg.textContent = "Applied Successfully.";
-      } else {
-        msg.textContent = data.message || "Application failed";
-      }
+  }
 
-    } catch (err) {
-      console.error("Fetch error:", err);
-      msg.textContent = "Server error. Please try again.";
-    }
-  });
+});
 
 });

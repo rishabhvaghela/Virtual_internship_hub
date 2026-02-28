@@ -166,3 +166,45 @@
         padding: 12px;
       }
     }
+
+    /* =========================
+BUTTON LOADING STATE
+========================= */
+
+.submit-btn.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-btn.loading::after {
+  content: " ⏳";
+}
+
+/* =========================
+TOAST SYSTEM
+========================= */
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+}
+
+.toast {
+  background: #1f2937;
+  color: white;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  min-width: 220px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.toast.success {
+  background: #16a34a;
+}
+
+.toast.error {
+  background: #dc2626;
+}
