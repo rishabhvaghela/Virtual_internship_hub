@@ -45,9 +45,9 @@ require_once "backend/actions/auth/session_check.php";
       <textarea id="cover" name="cover" placeholder="Why should we hire you?" required></textarea>
     </div>
 
-    <button type="submit" class="submit-btn">Submit Application</button>
-    <p id="formMsg" class="form-msg"></p>
+    <button type="submit" id="submitBtn" class="submit-btn">Submit Application</button>
   </form>
+  <div id="toastContainer" class="toast-container"></div>
 </div>
 
 <script src="assets/js/apply.js"></script>
