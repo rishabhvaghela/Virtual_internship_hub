@@ -1,0 +1,76 @@
+/* =========================
+   TOAST CONTAINER
+========================= */
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   TOAST BASE
+========================= */
+
+.toast {
+  min-width: 260px;
+  max-width: 340px;
+
+  padding: 14px 18px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #fff;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.15);
+
+  transform: translateX(120%);
+  opacity: 0;
+
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+
+  pointer-events: auto;
+}
+
+
+/* SHOW STATE */
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+
+/* =========================
+   TOAST TYPES
+========================= */
+
+.toast.success {
+  background: linear-gradient(135deg, #00c851, #007e33);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+}
+
+.toast.info {
+  background: linear-gradient(135deg, #33b5e5, #0099cc);
+}
+
+.toast.warning {
+  background: linear-gradient(135deg, #ffbb33, #ff8800);
+}
