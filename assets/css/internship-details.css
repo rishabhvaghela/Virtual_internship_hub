@@ -1,0 +1,41 @@
+body {
+
+font-family: Arial;
+background:#f4f6f9;
+padding:40px;
+
+}
+
+.container {
+
+max-width:800px;
+margin:auto;
+
+}
+
+.details-card {
+
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+
+}
+
+button {
+
+background:#4CAF50;
+color:white;
+padding:12px 20px;
+border:none;
+cursor:pointer;
+
+}
+
+.back-btn {
+
+display:inline-block;
+margin-bottom:20px;
+text-decoration:none;
+
+}
