@@ -35,7 +35,7 @@ function showToast(message, type = "success") {
 document.addEventListener("DOMContentLoaded", () => {
   initBackButton();
   loadInternships();
-  initFilters();
+  initSearch();
 });
 
 
@@ -45,6 +45,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let internshipData = [];
 let isStudentLoggedIn = false;
+
+/* =========================
+SEARCH SYSTEM
+========================= */
+
+function initSearch() {
+
+  const input = document.getElementById("searchInput");
+  const button = document.getElementById("searchBtn");
+
+  if (!input) return;
+
+  /* Real-time search */
+  input.addEventListener("input", performSearch);
+
+  /* Button search */
+  button.addEventListener("click", performSearch);
+
+}
+
+
+function performSearch() {
+
+  const query =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const grid = document.getElementById("internshipGrid");
+  const emptyBox = document.getElementById("noInternship");
+
+  grid.innerHTML = "";
+
+  const filtered = internshipData.filter(item => {
+
+    return (
+      item.title.toLowerCase().includes(query) ||
+      item.company_name.toLowerCase().includes(query) ||
+      (item.skills && item.skills.toLowerCase().includes(query)) ||
+      (item.department && item.department.toLowerCase().includes(query)) ||
+      (item.location && item.location.toLowerCase().includes(query))
+    );
+
+  });
+
+  if (filtered.length === 0) {
+
+    emptyBox.style.display = "block";
+    return;
+
+  }
+
+  emptyBox.style.display = "none";
+
+  filtered.forEach(item => {
+
+    grid.appendChild(createCard(item));
+
+  });
+
+}
 
 
 /* =========================
@@ -152,46 +214,50 @@ function createCard(data) {
     data.status &&
     data.status.toLowerCase() === "closed";
 
+  const workType =
+    data.type &&
+    data.type.toLowerCase() === "remote"
+      ? "remote"
+      : "onsite";
+
   const card = document.createElement("div");
 
   card.className = "internship-card";
 
-  const workType =
-    data.type &&
-      data.type.toLowerCase() === "remote"
-      ? "remote"
-      : "onsite";
+  /* Skills formatting */
+  let skillsHTML = "";
 
-  card.dataset.type = workType;
+  if (data.skills) {
 
-  card.dataset.category =
-    data.department
-      ? data.department.toLowerCase()
-      : "general";
+    const skills = data.skills.split(",");
 
+    skillsHTML = skills
+      .map(skill =>
+        `<span class="skill-badge">${skill.trim()}</span>`
+      )
+      .join("");
+
+  }
+
+  /* Description preview */
+  const description =
+    data.description
+      ? data.description.substring(0, 120) + "..."
+      : "No description available";
 
   card.innerHTML = `
-    
+
     <div class="card-header">
 
       <div class="company-logo">
         ${getInitials(data.company_name || "VIH")}
       </div>
 
-      <div class="card-tags">
-
-        <span class="tag ${workType}">
-          ${workType === "remote"
-      ? "Work From Home"
-      : "On Site"}
-        </span>
-
-        <span class="tag paid">Paid</span>
-
-        <span class="tag">
-          ${data.skills || "General"}
-        </span>
-
+      <div>
+        <h3>${data.title}</h3>
+        <div class="company-name">
+          ${data.company_name}
+        </div>
       </div>
 
     </div>
@@ -199,21 +265,40 @@ function createCard(data) {
 
     <div class="card-body">
 
-      <h3>${data.title}</h3>
+      <div class="card-meta">
 
-      <span class="company-name">
-        ${data.company_name}
-      </span>
+        <span class="meta-item">
+          🏢 ${data.department || "General"}
+        </span>
+
+        <span class="meta-item tag ${workType}">
+          ${workType === "remote"
+            ? "Remote"
+            : "On Site"}
+        </span>
+
+      </div>
+
+
+      <div class="card-description">
+      <span>Description:</span>
+        ${description}
+      </div>
+
+
+      <div class="skills-container">
+        ${skillsHTML}
+      </div>
 
 
       <div class="card-details">
 
         <div class="detail-item">
-          ⏳ ${data.duration_weeks} Weeks
+          ⏳ ${data.duration_weeks} weeks
         </div>
 
         <div class="detail-item">
-          💰 ₹${data.stipend}
+          💰 ₹${data.stipend}/month
         </div>
 
       </div>
@@ -230,8 +315,8 @@ function createCard(data) {
       >
 
         ${isClosed
-      ? "Internship Closed"
-      : "Apply"}
+          ? "Closed"
+          : "Apply Now"}
 
       </button>
 
@@ -239,7 +324,24 @@ function createCard(data) {
 
   `;
 
+card.addEventListener("click", (e) => {
+
+  /* ignore Apply button */
+  if (e.target.closest(".apply-btn")) return;
+
+  /* ignore back button */
+  if (e.target.closest(".back-btn")) return;
+
+  /* ignore links */
+  if (e.target.tagName === "A") return;
+
+  window.location.href =
+    "internship-details.html?id=" + data.id;
+
+});
+
   return card;
+
 }
 
 
@@ -342,74 +444,6 @@ function goToLogin() {
 
   window.location.href =
     "/virtual_internship_hub/login.html";
-
-}
-
-
-/* =========================
-   FILTERS
-========================= */
-
-function initFilters() {
-
-  document
-    .querySelectorAll(".filter-btn")
-    .forEach(button => {
-
-      button.addEventListener("click", function () {
-
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach(btn =>
-            btn.classList.remove("active")
-          );
-
-        this.classList.add("active");
-
-        const filterValue =
-          this.dataset.filter;
-
-        const cards =
-          document.querySelectorAll(
-            ".internship-card"
-          );
-
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-
-          const type =
-            card.dataset.type;
-
-          const category =
-            card.dataset.category;
-
-          if (
-            filterValue === "all" ||
-            filterValue === type ||
-            filterValue === category
-          ) {
-            card.style.display = "flex";
-            visibleCount++;
-          }
-          else {
-            card.style.display = "none";
-          }
-
-        });
-
-        const emptyBox =
-          document.getElementById("noInternship");
-
-        if (emptyBox)
-          emptyBox.style.display =
-            visibleCount === 0
-              ? "block"
-              : "none";
-
-      });
-
-    });
 
 }
 
