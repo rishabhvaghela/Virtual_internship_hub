@@ -12,6 +12,41 @@ $email    = trim($_POST['email'] ?? '');
 $password = trim($_POST['password'] ?? '');
 $role     = $_POST['role'] ?? 'student';
 
+/* =====================================
+   COMPANY EMAIL DOMAIN VALIDATION
+===================================== */
+
+if ($role === "company") {
+
+    $blocked = [
+        "gmail.com",
+        "yahoo.com",
+        "outlook.com",
+        "hotmail.com",
+        "icloud.com",
+        "protonmail.com",
+        "aol.com",
+        "live.com"
+    ];
+
+    $parts = explode("@", $email);
+
+    if (count($parts) !== 2) {
+        echo "INVALID_EMAIL";
+        exit;
+    }
+
+    $domain = strtolower($parts[1]);
+
+    if (in_array($domain, $blocked)) {
+
+        echo "INVALID_COMPANY_EMAIL";
+        exit;
+
+    }
+
+}
+
 /*
 |--------------------------------------------------------------------------
 | NOTE:
